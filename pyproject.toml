@@ -5,6 +5,9 @@ description = ""
 authors = [
     {name = "Дмитрий",email = "mecheny91@yandex.ru"}
 ]
+readme = "README.md"
+package-mode = false
+
 requires-python = ">=3.13"
 dependencies = [
 ]

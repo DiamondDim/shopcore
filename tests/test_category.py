@@ -5,6 +5,7 @@ from src.category import Category
 
 @pytest.fixture
 def sample_products():
+    """Фикстура для создания тестовых продуктов."""
     return [
         Product("iPhone 15", "512GB", 210000.0, 8),
         Product("Samsung S23", "256GB", 180000.0, 5)
@@ -13,6 +14,7 @@ def sample_products():
 
 @pytest.fixture
 def sample_category(sample_products):
+    """Фикстура для создания тестовой категории."""
     return Category("Смартфоны", "Мобильные телефоны", sample_products)
 
 
@@ -31,6 +33,7 @@ def test_category_products_are_product_objects(sample_category):
 
 def test_category_count_increment():
     """Тест автоматического подсчёта количества категорий."""
+    # Сбрасываем счетчики перед тестом
     Category.category_count = 0
     Category.product_count = 0
 
@@ -45,6 +48,7 @@ def test_category_count_increment():
 
 def test_product_count_increment():
     """Тест автоматического подсчёта количества товаров."""
+    # Сбрасываем счетчики перед тестом
     Category.category_count = 0
     Category.product_count = 0
 

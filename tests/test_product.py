@@ -4,6 +4,7 @@ from src.product import Product
 
 @pytest.fixture
 def sample_product():
+    """Фикстура для создания тестового продукта."""
     return Product("iPhone 15", "512GB, Gray", 210000.0, 8)
 
 

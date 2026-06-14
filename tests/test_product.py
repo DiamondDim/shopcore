@@ -30,3 +30,54 @@ def test_product_different_values():
     assert product.name == "Samsung"
     assert product.price == 180000.0
     assert product.quantity == 5
+
+
+def test_product_price_getter(sample_product):
+    """Тест геттера для цены."""
+    assert sample_product.price == 210000.0
+
+
+def test_product_price_setter_valid(sample_product):
+    """Тест сеттера с валидным значением."""
+    sample_product.price = 200000.0
+    assert sample_product.price == 200000.0
+
+
+def test_product_price_setter_negative(capsys):
+    """Тест сеттера с отрицательным значением."""
+    product = Product("Test", "Desc", 1000.0, 5)
+    product.price = -100
+    captured = capsys.readouterr()
+    assert "Цена не должна быть нулевая или отрицательная" in captured.out
+    assert product.price == 1000.0
+
+
+def test_product_price_setter_zero(capsys):
+    """Тест сеттера с нулевым значением."""
+    product = Product("Test", "Desc", 1000.0, 5)
+    product.price = 0
+    captured = capsys.readouterr()
+    assert "Цена не должна быть нулевая или отрицательная" in captured.out
+    assert product.price == 1000.0
+
+
+def test_new_product_classmethod():
+    """Тест класс-метода new_product."""
+    product_data = {
+        "name": "Samsung",
+        "description": "256GB",
+        "price": 180000.0,
+        "quantity": 5
+    }
+    product = Product.new_product(product_data)
+    assert product.name == "Samsung"
+    assert product.description == "256GB"
+    assert product.price == 180000.0
+    assert product.quantity == 5
+
+
+def test_product_private_price():
+    """Тест что атрибут price приватный."""
+    product = Product("Test", "Desc", 1000.0, 5)
+    with pytest.raises(AttributeError):
+        _ = product.__price

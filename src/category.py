@@ -20,13 +20,18 @@ class Category:
         """Геттер для приватного атрибута списка товаров."""
         result = ""
         for product in self.__products:
-            result += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            result += str(product) + "\n"
         return result
 
     def add_product(self, product: Product):
         """Метод для добавления продукта в категорию."""
         self.__products.append(product)
         Category.product_count += 1
+
+    def __str__(self):
+        """Строковое представление категории с общим количеством товаров на складе."""
+        total_quantity = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
 
     def __repr__(self):
         return f"Category('{self.name}', '{self.description}', {self.__products})"

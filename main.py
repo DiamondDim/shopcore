@@ -11,20 +11,28 @@ if __name__ == "__main__":
         [product1, product2, product3]
     )
 
-    print(category1.products)
-    product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
-    category1.add_product(product4)
-    print(category1.products)
-    print(category1.product_count)
+    # Тест __str__ для Product
+    print(product1)
+    print(product2)
+    print(product3)
 
+    # Тест __str__ для Category
+    print(category1)
+
+    # Тест геттера products (теперь использует __str__)
+    print(category1.products)
+
+    # Тест __add__
+    print(product1 + product2)  # 180000*5 + 210000*8 = 2580000
+
+    # Тест new_product
     new_product = Product.new_product(
-        {"name": "Samsung Galaxy S23 Ultra", "description": "256GB, Серый цвет, 200MP камера", "price": 180000.0,
-         "quantity": 5})
-    print(new_product.name)
-    print(new_product.description)
-    print(new_product.price)
-    print(new_product.quantity)
+        {"name": "Samsung Galaxy S23 Ultra", "description": "256GB, Серый цвет, 200MP камера",
+         "price": 180000.0, "quantity": 5}
+    )
+    print(new_product)
 
+    # Тест сеттера цены
     new_product.price = 800
     print(new_product.price)
 

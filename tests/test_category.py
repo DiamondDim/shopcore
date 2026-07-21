@@ -103,3 +103,9 @@ def test_category_products_getter_uses_str(sample_category):
     result = sample_category.products
     assert "iPhone 15, 210000.0 руб. Остаток: 8 шт." in result
     assert "Samsung S23, 180000.0 руб. Остаток: 5 шт." in result
+
+
+def test_category_add_product_type_error(sample_category):
+    """Тест что нельзя добавить не-продукт в категорию."""
+    with pytest.raises(TypeError):
+        sample_category.add_product("Not a product")

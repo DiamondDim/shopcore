@@ -81,3 +81,24 @@ def test_product_private_price():
     product = Product("Test", "Desc", 1000.0, 5)
     with pytest.raises(AttributeError):
         _ = product.__price
+
+
+def test_product_str(sample_product):
+    """Тест магического метода __str__ для Product."""
+    result = str(sample_product)
+    assert result == "iPhone 15, 210000.0 руб. Остаток: 8 шт."
+
+
+def test_product_add():
+    """Тест магического метода __add__ для Product."""
+    product1 = Product("Phone1", "Desc", 100.0, 10)
+    product2 = Product("Phone2", "Desc", 200.0, 2)
+    result = product1 + product2
+    # 100*10 + 200*2 = 1400
+    assert result == 1400
+
+
+def test_product_add_type_error(sample_product):
+    """Тест __add__ с некорректным типом."""
+    with pytest.raises(TypeError):
+        _ = sample_product + 100

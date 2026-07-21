@@ -30,5 +30,15 @@ class Product:
             quantity=product_data["quantity"]
         )
 
+    def __str__(self):
+        """Строковое представление товара."""
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
     def __repr__(self):
-        return f"Product('{self.name}', '{self.description}', {self.__price}, {self.quantity})"
+        return f"Product('{self.name}', '{self.description}', {self.price}, {self.quantity})"
+
+    def __add__(self, other):
+        """Сложение двух товаров: сумма стоимостей на складе."""
+        if isinstance(other, Product):
+            return (self.__price * self.quantity) + (other.price * other.quantity)
+        raise TypeError("Можно складывать только объекты Product")

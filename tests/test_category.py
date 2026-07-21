@@ -89,3 +89,17 @@ def test_category_products_private():
     category = Category("Test", "Desc", [])
     with pytest.raises(AttributeError):
         _ = category.__products
+
+
+def test_category_str(sample_category):
+    """Тест магического метода __str__ для Category."""
+    result = str(sample_category)
+    # iPhone 15 (8 шт) + Samsung S23 (5 шт) = 13 шт
+    assert result == "Смартфоны, количество продуктов: 13 шт."
+
+
+def test_category_products_getter_uses_str(sample_category):
+    """Тест что геттер products использует __str__ продукта."""
+    result = sample_category.products
+    assert "iPhone 15, 210000.0 руб. Остаток: 8 шт." in result
+    assert "Samsung S23, 180000.0 руб. Остаток: 5 шт." in result

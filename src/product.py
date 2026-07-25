@@ -46,6 +46,8 @@ class Product(PrintReprMixin, BaseProduct):
     """Класс для представления товара."""
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        if quantity <= 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         super().__init__(name, description, price, quantity)
 
     @classmethod

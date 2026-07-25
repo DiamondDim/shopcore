@@ -112,3 +112,10 @@ def test_product_add_different_classes():
     grass = LawnGrass("Grass", "Desc", 50.0, 5, "Россия", "7 дней", "Зеленый")
     with pytest.raises(TypeError):
         _ = phone + grass
+
+
+def test_product_zero_quantity():
+    """Проверка, что при нулевом количестве выбрасывается ValueError."""
+    with pytest.raises(ValueError) as excinfo:
+        Product("Бракованный товар", "Неверное количество", 1000.0, 0)
+    assert str(excinfo.value) == "Товар с нулевым количеством не может быть добавлен"

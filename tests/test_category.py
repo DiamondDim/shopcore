@@ -105,7 +105,24 @@ def test_category_products_getter_uses_str(sample_category):
     assert "Samsung S23, 180000.0 руб. Остаток: 5 шт." in result
 
 
-def test_category_add_product_type_error(sample_category):
+def test_category_add_product_type_error(sample_category, capsys):
     """Тест что нельзя добавить не-продукт в категорию."""
-    with pytest.raises(TypeError):
-        sample_category.add_product("Not a product")
+    sample_category.add_product("Не продукт")
+
+    captured = capsys.readouterr()
+    assert "Можно добавлять только объекты Product" in captured.out
+    assert "Обработка добавления товара завершена" in captured.out
+
+
+def test_middle_price():
+    """Проверка расчёта средней цены."""
+    product1 = Product("Товар 1", "Описание", 100.0, 1)
+    product2 = Product("Товар 2", "Описание", 200.0, 1)
+    category = Category("Тестовая категория", "Описание", [product1, product2])
+    assert category.middle_price() == 150.0
+
+
+def test_middle_price_empty():
+    """Проверка средней цены для пустой категории."""
+    category = Category("Пустая категория", "Описание", [])
+    assert category.middle_price() == 0.0

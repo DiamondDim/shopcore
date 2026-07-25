@@ -9,12 +9,10 @@ class Product:
 
     @property
     def price(self) -> float:
-        """Геттер для приватного атрибута цены."""
         return self.__price
 
     @price.setter
     def price(self, new_price: float):
-        """Сеттер для приватного атрибута цены с проверкой."""
         if new_price <= 0:
             print("Цена не должна быть нулевая или отрицательная")
         else:
@@ -22,7 +20,6 @@ class Product:
 
     @classmethod
     def new_product(cls, product_data: dict) -> "Product":
-        """Класс-метод для создания продукта из словаря."""
         return cls(
             name=product_data["name"],
             description=product_data["description"],
@@ -31,14 +28,12 @@ class Product:
         )
 
     def __str__(self):
-        """Строковое представление товара."""
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __repr__(self):
         return f"Product('{self.name}', '{self.description}', {self.price}, {self.quantity})"
 
     def __add__(self, other):
-        """Сложение двух товаров: сумма стоимостей на складе."""
-        if isinstance(other, Product):
-            return (self.__price * self.quantity) + (other.price * other.quantity)
-        raise TypeError("Можно складывать только объекты Product")
+        if type(self) is not type(other):
+            raise TypeError("Можно складывать только объекты одного класса")
+        return (self.__price * self.quantity) + (other.price * other.quantity)

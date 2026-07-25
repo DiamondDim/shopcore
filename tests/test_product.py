@@ -102,3 +102,13 @@ def test_product_add_type_error(sample_product):
     """Тест __add__ с некорректным типом."""
     with pytest.raises(TypeError):
         _ = sample_product + 100
+
+
+def test_product_add_different_classes():
+    """Тест что нельзя сложить объекты разных классов."""
+    from src.smartphone import Smartphone
+    from src.lawn_grass import LawnGrass
+    phone = Smartphone("Phone", "Desc", 100.0, 10, 90.0, "M1", 128, "Black")
+    grass = LawnGrass("Grass", "Desc", 50.0, 5, "Россия", "7 дней", "Зеленый")
+    with pytest.raises(TypeError):
+        _ = phone + grass

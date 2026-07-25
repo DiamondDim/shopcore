@@ -24,9 +24,12 @@ class Category:
         return result
 
     def add_product(self, product: Product):
-        """Метод для добавления продукта в категорию."""
-        self.__products.append(product)
-        Category.product_count += 1
+        """Метод для добавления продукта в категорию с проверкой типа."""
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
+        else:
+            raise TypeError("Можно добавлять только объекты Product и его наследников")
 
     def __str__(self):
         """Строковое представление категории с общим количеством товаров на складе."""
